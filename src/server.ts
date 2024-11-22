@@ -1,11 +1,19 @@
-import express, { Request, Response } from 'express';
-const app = express();
-const port = 5000;
+import app from './app';
+import config from './app/config';
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
-});
+import mongoose from 'mongoose';
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+async function main() {
+  try {
+    await mongoose.connect(config.database_url as string);
+    // await mongoose.connect('mongodb://localhost:27017/BookDb');
+
+    app.listen(config.port, () => {
+      console.log(` app listing on port ${config.port}`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+main();
