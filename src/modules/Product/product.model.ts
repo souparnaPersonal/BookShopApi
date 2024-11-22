@@ -1,38 +1,22 @@
 import { Schema, model } from 'mongoose';
 import { TBook } from './product.interface';
 
-export const bookSchema = new Schema<TBook>(
-  {
-    title: { type: String, required: true },
-    author: { type: String, required: true },
-    price: { type: Number, required: true },
-    category: {
-      type: String,
-      enum: {
-        values: [
-          'Fiction',
-          'Science',
-          'SelfDevelopment',
-          'Poetry',
-          'Religious',
-        ],
-        message: '{VALUE} is not valitd',
-      },
-    },
-    description: { type: String, required: true },
-    quantity: { type: Number, required: true },
-    inStock: { type: Boolean, required: true },
-  },
-
-  {
-    toJSON: {
-      virtuals: true,
+export const bookSchema = new Schema<TBook>({
+  title: { type: String, required: true },
+  author: { type: String, required: true },
+  price: { type: Number, required: true },
+  category: {
+    type: String,
+    enum: {
+      values: ['Fiction', 'Science', 'SelfDevelopment', 'Poetry', 'Religious'],
+      message: '{VALUE} is not valitd',
     },
   },
-);
-
-bookSchema.virtual('createdAt').get(function () {
-  return `${new Date()}`;
+  description: { type: String, required: true },
+  quantity: { type: Number, required: true },
+  inStock: { type: Boolean, required: true },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
 });
 
 export const Book = model<TBook>('Book', bookSchema);

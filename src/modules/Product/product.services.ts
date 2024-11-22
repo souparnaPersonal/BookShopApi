@@ -6,8 +6,21 @@ const createBook = async (book: TBook) => {
   return result;
 };
 
-const getAllBook = async () => {
-  const result = await Book.find();
+const getAllBooks = async (searchTerm: any) => {
+  console.log('service', searchTerm);
+
+  const query = searchTerm
+    ? {
+        $or: [
+          { title: { $regex: searchTerm, $options: 'i' } },
+          { author: { $regex: searchTerm, $options: 'i' } },
+          { category: { $regex: searchTerm, $options: 'i' } },
+        ],
+      }
+    : {};
+
+  const result = await Book.find(query);
+
   return result;
 };
 
@@ -36,7 +49,7 @@ const deleteAbook = async (id: string) => {
 
 export const productServices = {
   createBook,
-  getAllBook,
+  getAllBooks,
   getSingleBook,
   updateSpecificBook,
   deleteAbook,
