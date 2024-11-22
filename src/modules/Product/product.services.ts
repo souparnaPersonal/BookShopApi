@@ -25,12 +25,19 @@ const updateSpecificBook = async (id: string, updatedFields: any) => {
       $set: updatedFields,
     },
   );
-  console.log(result);
+
   return result;
 };
+
+const deleteAbook = async (id: string) => {
+  const result = await Book.deleteOne({ _id: id });
+  return result;
+};
+
 export const productServices = {
   createBook,
   getAllBook,
   getSingleBook,
   updateSpecificBook,
+  deleteAbook,
 };

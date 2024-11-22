@@ -75,9 +75,27 @@ const updateSpecificBook = async (req: Request, res: Response) => {
     });
   }
 };
+
+const deleteAbook = async (req: Request, res: Response) => {
+  try {
+    await productServices.deleteAbook(req.params.productId);
+    res.status(200).json({
+      message: 'Book deleted successfully',
+      status: true,
+      data: {},
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: 'Something went wrong',
+      status: true,
+      data: error,
+    });
+  }
+};
 export const bookControllers = {
   createBook,
   getAllBook,
   getSingleBook,
   updateSpecificBook,
+  deleteAbook,
 };
