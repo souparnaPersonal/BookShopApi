@@ -6,6 +6,12 @@ const createBook = async (book: TBook) => {
   return result;
 };
 
+const getAllBook = async () => {
+  const result = await await Book.find();
+  return result;
+};
+
 export const productServices = {
   createBook,
+  getAllBook,
 };
