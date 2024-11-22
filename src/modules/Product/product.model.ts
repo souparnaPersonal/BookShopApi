@@ -15,8 +15,8 @@ export const bookSchema = new Schema<TBook>({
   description: { type: String, required: true },
   quantity: { type: Number, required: true },
   inStock: { type: Boolean, required: true },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
 });
+
+bookSchema.set('timestamps', true);
 
 export const Book = model<TBook>('Book', bookSchema);

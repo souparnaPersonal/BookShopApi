@@ -32,11 +32,12 @@ const getSingleBook = async (id: string) => {
 };
 
 const updateSpecificBook = async (id: string, updatedFields: any) => {
-  const result = await Book.findByIdAndUpdate(
+  const result = await Book.findOneAndUpdate(
     { _id: Object(id) },
     {
       $set: updatedFields,
     },
+    { new: true },
   );
 
   return result;
