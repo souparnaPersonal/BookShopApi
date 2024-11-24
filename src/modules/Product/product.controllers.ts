@@ -79,10 +79,10 @@ const updateSpecificBook = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    res.status(400).json({
+    res.status(404).json({
       message: 'Something went wrong',
       status: true,
-      data: error,
+      error,
     });
   }
 };

@@ -2,8 +2,10 @@ import { TBook } from './product.interface';
 import { Book } from './product.model';
 
 const createBook = async (book: TBook) => {
-  const newBook = new Book(book);
-  const result = newBook.save();
+  // const newBook = new Book(book);
+  // const result = newBook.save();
+  const result = await Book.create(book);
+
   return result;
 };
 
@@ -32,13 +34,17 @@ const getSingleBook = async (id: string) => {
   return result;
 };
 
-const updateSpecificBook = async (id: string, updatedFields: object) => {
+const updateSpecificBook = async (
+  id: string,
+  updatedFields: Partial<TBook>,
+) => {
+  console.log(updatedFields);
   const result = await Book.findOneAndUpdate(
     { _id: Object(id) },
     {
       $set: updatedFields,
     },
-    { new: true },
+    { new: true, runValidators: true },
   );
 
   return result;
