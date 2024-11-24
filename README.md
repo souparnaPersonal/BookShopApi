@@ -2,6 +2,8 @@
 
 Welcome to the **BookShop API**! This is a simple API built with **Express**, **TypeScript**, **MongoDB**, **Mongoose**, and **ESLint**. It allows you to manage a book inventory, process orders, and track revenue.
 
+### Api Live Link : https://book-api-v2.vercel.app/
+
 ## Features
 
 - **Create a Book**: Add new books to the inventory.
@@ -35,4 +37,6 @@ Follow these steps to run the **BookShop API** locally:
 
 ### Step 1: Clone the Repository
 
-Clone the repository to your local machine:
+### Step 2: Run "npm i"
+
+### Step 3: Connect with mongodb

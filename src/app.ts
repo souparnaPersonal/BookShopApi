@@ -12,4 +12,10 @@ app.use(cors());
 app.use('/api', BookRoutes);
 app.use('/api', OrderRoutes);
 
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Welcome to BooksShop Api',
+  });
+});
+
 export default app;
