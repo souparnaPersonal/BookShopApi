@@ -49,7 +49,7 @@ const updateSpecificBook = async (
     {
       $set: updatedFields,
     },
-    { new: true, runValidators: true },
+    { new: true, runValidators: true, timestamps: true },
   );
 
   return result;
