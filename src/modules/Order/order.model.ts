@@ -4,7 +4,13 @@ import { TOrder } from './order.interface';
 export const orderSchema = new Schema<TOrder>({
   email: {
     type: String,
-    required: true,
+    required: [true, 'email is required'],
+    match: [
+      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+      'Please provide a valid email address',
+    ],
+    trim: true,
+    lowercase: true,
   },
   product: {
     type: mongoose.Schema.Types.ObjectId,
