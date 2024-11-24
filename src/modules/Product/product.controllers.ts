@@ -57,12 +57,12 @@ const getSingleBook = async (req: Request, res: Response) => {
       status: true,
       data: result,
     });
-  } catch (error) {
-    // console.log(error);
-    res.status(400).json({
+  } catch (error: any) {
+    console.log(error);
+    res.status(404).json({
       message: 'Validation faild',
       success: false,
-      error,
+      error: error.message,
     });
   }
 };
@@ -95,11 +95,11 @@ const deleteAbook = async (req: Request, res: Response) => {
       status: true,
       data: {},
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(400).json({
       message: 'Something went wrong',
-      status: true,
-      data: error,
+      status: false,
+      error: error.message,
     });
   }
 };

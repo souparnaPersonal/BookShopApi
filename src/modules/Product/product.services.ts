@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { TBook } from './product.interface';
 import { Book } from './product.model';
 
@@ -28,9 +29,13 @@ const getAllBooks = async (searchTerm: unknown) => {
 };
 
 const getSingleBook = async (id: string) => {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new Error('Invalid id no book found');
+  }
   const result = await Book.findById({
     _id: Object(id),
   });
+
   return result;
 };
 
@@ -51,6 +56,9 @@ const updateSpecificBook = async (
 };
 
 const deleteAbook = async (id: string) => {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new Error('Invalid id no book found for delete');
+  }
   const result = await Book.deleteOne({ _id: id });
   return result;
 };
