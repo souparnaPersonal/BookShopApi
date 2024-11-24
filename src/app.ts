@@ -9,7 +9,7 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
-app.use('/api/v1/bookShop', BookRoutes);
-app.use('/api/v1/bookShop', OrderRoutes);
+app.use('/api', BookRoutes);
+app.use('/api', OrderRoutes);
 
 export default app;

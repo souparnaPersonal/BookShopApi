@@ -10,8 +10,9 @@ const createBook = async (req: Request, res: Response) => {
       success: true,
       data: result,
     });
-  } catch (error) {
-    // console.log(error);
+  } catch (error: any) {
+    console.log('from createBsfddsook', error);
+
     res.status(400).json({
       message: 'Validation faild',
       success: false,
@@ -25,11 +26,19 @@ const getAllBook = async (req: Request, res: Response) => {
     const { searchTerm } = req.query;
     console.log(searchTerm);
     const result = await productServices.getAllBooks(searchTerm);
-    res.status(200).json({
-      message: 'Books retrieved successfully',
-      status: true,
-      data: result,
-    });
+    if (result.length) {
+      res.status(200).json({
+        message: 'Books retrieved successfully',
+        status: true,
+        data: result,
+      });
+    } else {
+      res.status(404).json({
+        message: 'No books found',
+        status: false,
+        data: result,
+      });
+    }
   } catch (error) {
     // console.log(error);
     res.status(400).json({

@@ -1,7 +1,8 @@
 import { Book } from '../Product/product.model';
+import { TOrder } from './order.interface';
 import { Order } from './order.model';
 
-const orderAProduct = async (data: any) => {
+const orderAProduct = async (data: TOrder) => {
   const book = await Book.findById(data.product);
 
   if (!book) {
@@ -16,8 +17,15 @@ const orderAProduct = async (data: any) => {
 
   await Book.updateOne(
     { _id: data.product },
-    { $inc: { quantity: -data.quantity } },
+    {
+      $inc: { quantity: -data.quantity },
+    },
   );
+
+  const updatedBook = await Book.findById(data.product);
+  if (updatedBook && updatedBook.quantity === 0) {
+    await Book.updateOne({ _id: data.product }, { $set: { inStock: false } });
+  }
 
   return result;
 };
@@ -37,8 +45,10 @@ const calculateTotalRevenue = async () => {
       },
     },
   ]);
-  return result;
+
+  return result[0];
 };
+
 export const orerServices = {
   orderAProduct,
   calculateTotalRevenue,
