@@ -2,7 +2,9 @@
 
 Welcome to the **BookShop API**! This is a simple API built with **Express**, **TypeScript**, **MongoDB**, **Mongoose**, and **ESLint**. It allows you to manage a book inventory, process orders, and track revenue.
 
-### Api Live Link : https://book-api-v2.vercel.app/
+### Api Live Link : https://book-api-v3.vercel.app/
+
+### Video Explanation
 
 ## Features
 
