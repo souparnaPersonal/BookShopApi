@@ -11,7 +11,6 @@ const orderAProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: unknown) {
-    console.log(error);
     const errorMessage =
       error instanceof Error ? error.message : 'An unexpected error occurred';
     res.status(400).json({

@@ -23,22 +23,16 @@ const createBook = async (req: Request, res: Response) => {
 
 const getAllBook = async (req: Request, res: Response) => {
   try {
-    const { searchTerm } = req.query;
-    console.log(searchTerm);
-    const result = await productServices.getAllBooks(searchTerm);
-    if (result.length) {
-      res.status(200).json({
-        message: 'Books retrieved successfully',
-        status: true,
-        data: result,
-      });
-    } else {
-      res.status(404).json({
-        message: 'No books found',
-        status: false,
-        data: result,
-      });
-    }
+    const { searchTerm, category } = req.query;
+    console.log('from controllehhhr', req.cookies);
+    const result = await productServices.getAllBooks(req.query);
+
+    res.status(200).json({
+      message: 'Books retrieved successfully',
+      status: true,
+      data: result.result,
+      meta: result.meta,
+    });
   } catch (error) {
     // console.log(error);
     res.status(400).json({

@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import { TBook } from './product.interface';
 import { Book } from './product.model';
+import QueryBuilder from '../../app/builder/QueryBuilder';
+import { searchableFields } from './product.constants';
 
 const createBook = async (book: TBook) => {
   // const newBook = new Book(book);
@@ -10,22 +12,20 @@ const createBook = async (book: TBook) => {
   return result;
 };
 
-const getAllBooks = async (searchTerm: unknown) => {
-  console.log('service', searchTerm);
+const getAllBooks = async (query: Record<string, unknown>) => {
+  const getAllBooksQuery = new QueryBuilder(Book.find(), query)
+    .search(searchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
 
-  const query = searchTerm
-    ? {
-        $or: [
-          { title: { $regex: searchTerm, $options: 'i' } },
-          { author: { $regex: searchTerm, $options: 'i' } },
-          { category: { $regex: searchTerm, $options: 'i' } },
-        ],
-      }
-    : {};
-
-  const result = await Book.find(query);
-
-  return result;
+  const result = await getAllBooksQuery.modelQuery;
+  const meta = await getAllBooksQuery.countTotal();
+  return {
+    result,
+    meta,
+  };
 };
 
 const getSingleBook = async (id: string) => {

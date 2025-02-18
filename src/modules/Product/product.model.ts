@@ -22,7 +22,8 @@ export const bookSchema = new Schema<TBook>({
     required: true,
     min: [1, 'quantity should not zero or negative'],
   },
-  inStock: { type: Boolean, required: true },
+  inStock: { type: Boolean, default: true },
+  imageUrl: { type: String },
 });
 
 bookSchema.set('timestamps', true);

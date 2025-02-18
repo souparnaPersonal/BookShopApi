@@ -5,7 +5,8 @@ export type TBook = {
   category: 'Fiction' | 'Science' | 'SelfDevelopment' | 'Poetry' | 'Religious';
   description: string;
   quantity: number;
-  inStock: boolean;
+  inStock?: boolean;
   createdAt: Date;
   updatedAt: Date;
+  imageUrl: string;
 };
